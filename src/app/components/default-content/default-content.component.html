@@ -1,0 +1,31 @@
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<mat-stepper  #stepper>
+    <mat-step label="step1">
+      
+        <div>
+          step 1, good start.
+        </div>
+      
+    </mat-step>
+    <mat-step  label="step2">
+      
+        <div>
+            step 2
+        </div>
+      
+    </mat-step>
+    <mat-step label="step3">
+      
+      <p>step 3, You are now done.</p>
+      <div>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+
+
+

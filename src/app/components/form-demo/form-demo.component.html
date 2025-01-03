@@ -1,0 +1,53 @@
+<p>form-demo</p>
+
+<strong>1. Response from backend:</strong><br/>
+{{postBody|json}}
+<br />
+-----------------------------
+<form [formGroup]="customForm" (ngSubmit)="onSubmit()">
+    <br />
+    <strong>2.autocomplete from backend api with debounce and switchmap</strong><br/>
+    <mat-label>autocomplete</mat-label>
+    <input type="text" placeholder="Pick one" aria-label="Number" matInput formControlName="autocomplete"
+        [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+        @for (option of filteredOptions; track option.id) {
+        <mat-option [value]="option.title">{{option.title}}</mat-option>
+        }
+    </mat-autocomplete>
+
+    <br />
+    <strong>3. form field validation,custom validator</strong><br/>
+    <label for="name"> Name: </label>
+    <input id="name" name="name" type="text" autocomplete="name" formControlName="name"> min length: 4;required;
+    <div *ngIf="nameControl.invalid && (nameControl.dirty || nameControl.touched)" class="alert">
+        @if (nameControl.errors?.['required']){
+        <div>Name is required.</div>
+        }
+        @if(nameControl.errors?.['minlength']) {
+        <div> Name must be at least 4 characters long.</div>
+        }
+        @if(nameControl.errors?.['forbiddenName']){
+        <div> Name must not be {{nameControl.getError("forbiddenName").value}}. </div>
+        }
+    </div>
+    <br />
+    <label for="reqId">request id: </label>
+    <input id="reqId" name="reqId" type="text" formControlName="reqId"> required
+    <div class="alert" *ngIf="reqIdControl.errors?.['required'] && (reqIdControl.touched)">reqId is required.</div>
+
+    <br /><br />
+    <strong>4. form group validation,custom validator</strong><br/>
+    @if(customForm.errors?.['specialCase'] &&(customForm.touched || customForm.dirty)){
+    <div class="alert">
+        Form validation:failed, speical case occurs, name is yao1, reqId is 1
+    </div>
+    }@else {
+        Form validation: pass.
+    }
+    <br />
+    <span>
+        <button type="submit" [disabled]="!customForm.valid">Submit</button>
+        <p>Complete the form to enable button.</p>
+    </span>
+</form>
